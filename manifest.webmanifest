@@ -1,0 +1,15 @@
+{
+  "name": "안면마비 케어 (연구용)",
+  "short_name": "안면마비 케어",
+  "description": "스마트폰 카메라 기반 안면마비 평가·경과 추적·재활 가이드 연구용 프로토타입",
+  "lang": "ko",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f9f9f7",
+  "theme_color": "#2a78d6",
+  "icons": [
+    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
