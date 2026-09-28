@@ -1,11 +1,11 @@
 // Offline cache for the app shell, WASM runtime and model (same-origin GETs,
 // plus the pinned remote model URL). Network-first for navigations so a new
 // version is picked up; cache-first for immutable assets.
-const CACHE = 'fpc-v1';
+const CACHE = 'fpc-v2';
 const MODEL_HOST = 'storage.googleapis.com';
 
 self.addEventListener('install', (e) => {
-  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(['./', './index.html', './manifest.webmanifest', './icons/icon.svg'])));
+  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(['./', './index.html', './manifest.webmanifest', './icons/icon.svg', './icons/icon-192.png', './icons/apple-touch-icon.png'])));
   self.skipWaiting();
 });
 
