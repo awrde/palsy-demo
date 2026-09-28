@@ -1,9 +1,9 @@
 // Offline cache for the app shell, WASM runtime and model (same-origin GETs,
 // plus the pinned remote model URL). Network-first for navigations so a new
 // version is picked up; cache-first for immutable assets.
-// v3: the 3D head became models/head.glb (the old facecap.glb copy leaves the cache). Bump when a public/ file
-// keeps its name but changes (e.g. the head model): cached files are served cache-first.
-const CACHE = 'fpc-v3';
+// v3: the 3D head became models/head.glb (the old facecap.glb copy leaves the cache); v4: head.glb re-exported
+// (baked shading, full teeth). Bump when a public/ file keeps its name but changes: cached files are served cache-first.
+const CACHE = 'fpc-v4';
 const MODEL_HOST = 'storage.googleapis.com';
 
 self.addEventListener('install', (e) => {
