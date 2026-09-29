@@ -7,8 +7,9 @@
 // v7: eye-open (fixing fingers at the inner corner) and frontalis (arms as at 1:14) re-rendered.
 // v8: eye-open again (the fixing middle finger below the eye, the index above it).
 // v9: eye-open inner-out: the stretching middle finger starts below the eye too.
+// v10: eye-open inner-out: the stretching fingers close onto the eye line while sliding out (2:37-2:43).
 // Bump when a public/ file keeps its name but changes: cached files are served cache-first.
-const CACHE = 'fpc-v9';
+const CACHE = 'fpc-v10';
 const MODEL_HOST = 'storage.googleapis.com';
 
 self.addEventListener('install', (e) => {
