@@ -5,8 +5,9 @@
 // (baked shading, full teeth); v5: demo clips re-rendered under the same names (lips follow, level head, steps 6-16);
 // v6: platysma and zyg-minor re-rendered (the base of the neck stays when the head turns).
 // v7: eye-open (fixing fingers at the inner corner) and frontalis (arms as at 1:14) re-rendered.
+// v8: eye-open again (the fixing middle finger below the eye, the index above it).
 // Bump when a public/ file keeps its name but changes: cached files are served cache-first.
-const CACHE = 'fpc-v7';
+const CACHE = 'fpc-v8';
 const MODEL_HOST = 'storage.googleapis.com';
 
 self.addEventListener('install', (e) => {
