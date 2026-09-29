@@ -2,9 +2,10 @@
 // plus the pinned remote model URL). Network-first for navigations so a new
 // version is picked up; cache-first for immutable assets.
 // v3: the 3D head became models/head.glb (the old facecap.glb copy leaves the cache); v4: head.glb re-exported
-// (baked shading, full teeth); v5: demo clips re-rendered under the same names (lips follow, level head, steps 6-16).
+// (baked shading, full teeth); v5: demo clips re-rendered under the same names (lips follow, level head, steps 6-16);
+// v6: platysma and zyg-minor re-rendered (the base of the neck stays when the head turns).
 // Bump when a public/ file keeps its name but changes: cached files are served cache-first.
-const CACHE = 'fpc-v5';
+const CACHE = 'fpc-v6';
 const MODEL_HOST = 'storage.googleapis.com';
 
 self.addEventListener('install', (e) => {
