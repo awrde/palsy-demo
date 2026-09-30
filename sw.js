@@ -31,6 +31,8 @@ self.addEventListener('fetch', (e) => {
   const url = new URL(req.url);
   const sameOrigin = url.origin === self.location.origin;
   if (!sameOrigin && url.host !== MODEL_HOST) return;
+  // The intro page (intro/) is a separate static page: never cache it, and never let its navigation replace index.html.
+  if (sameOrigin && url.pathname.includes('/intro/')) return;
   if (req.mode === 'navigate') {
     e.respondWith(
       fetch(req)
