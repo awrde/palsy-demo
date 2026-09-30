@@ -6,46 +6,101 @@
 <title>안면마비 케어 소개</title>
 <meta name="robots" content="noindex">
 <style>
-  :root { --ink: #1c2330; --ink2: #566175; --line: #e3e6ec; --bg: #f6f7f9; --card: #fff; --blue: #3e63dd; --wash: #edf2fe; --warn: #fff6e5; }
+  :root { --ink: #1c2330; --ink2: #566175; --line: #e3e6ec; --bg: #f6f7f9; --card: #fff; --blue: #3e63dd; --wash: #edf2fe; --warn: #fff6e5; --orange: #e8750a; }
   * { box-sizing: border-box; }
-  body { margin: 0; background: var(--bg); color: var(--ink); font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', sans-serif; font-size: 16px; line-height: 1.6; word-break: keep-all; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', sans-serif; font-size: 16px; line-height: 1.6; word-break: keep-all; overflow-wrap: break-word; }
   main { max-width: 720px; margin: 0 auto; padding: 20px 16px 40px; }
   h1 { font-size: 26px; line-height: 1.3; margin: 4px 0 6px; letter-spacing: -0.02em; }
   .sub { color: var(--ink2); margin: 0 0 10px; }
   .badges span { display: inline-block; font-size: 13px; font-weight: 700; padding: 2px 10px; border-radius: 999px; background: #eceef2; color: #3b4455; margin: 0 4px 4px 0; }
-  section { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; margin-top: 16px; }
-  h2 { font-size: 19px; margin: 0 0 10px; }
+  nav.toc { display: flex; gap: 6px; overflow-x: auto; padding: 10px 0 2px; margin: 0 -16px; padding-left: 16px; padding-right: 16px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  nav.toc::-webkit-scrollbar { display: none; }
+  nav.toc a { flex: none; font-size: 14px; font-weight: 700; color: var(--blue); background: var(--wash); border-radius: 999px; padding: 6px 12px; text-decoration: none; }
+  nav.toc a.hl { background: var(--blue); color: #fff; }
+  section { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; margin-top: 16px; scroll-margin-top: 12px; }
+  section.hl { border: 2px solid var(--blue); }
+  h2 { font-size: 20px; margin: 0 0 10px; line-height: 1.35; }
+  h3 { font-size: 16px; margin: 16px 0 6px; }
+  p { margin: 0 0 8px; }
+  .muted { color: var(--ink2); }
+  .small { font-size: 14px; }
   video, .plan img { width: 100%; border-radius: 10px; display: block; background: #000; }
   .video { max-width: 360px; margin: 0 auto; }
-  .gallery { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; -webkit-overflow-scrolling: touch; }
-  .gallery figure { flex: none; width: 62%; max-width: 240px; margin: 0; scroll-snap-align: start; }
-  .gallery img { width: 100%; border-radius: 10px; border: 1px solid var(--line); display: block; }
+  .scroller { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; -webkit-overflow-scrolling: touch; }
+  .scroller figure { flex: none; width: 62%; max-width: 240px; margin: 0; scroll-snap-align: start; }
+  .scroller img { width: 100%; border-radius: 10px; border: 1px solid var(--line); display: block; }
+  .scroller.clips figure { width: 78%; max-width: 300px; }
+  .scroller.clips video { aspect-ratio: 8 / 7; object-fit: cover; background: #c9cbd0; }
   figcaption { font-size: 14px; color: var(--ink2); margin-top: 6px; }
   figcaption b { color: var(--ink); display: block; }
   .hint { font-size: 13px; color: var(--ink2); margin: 8px 0 0; }
   .plan img { background: #fff; border: 1px solid var(--line); }
   .btn { display: block; text-align: center; background: var(--blue); color: #fff; text-decoration: none; font-weight: 700; padding: 14px; border-radius: 12px; margin-top: 12px; }
   .btn.ghost { background: var(--wash); color: var(--blue); }
-  ul { margin: 0; padding-left: 20px; }
+  ul, ol { margin: 0 0 8px; padding-left: 20px; }
+  li { margin-bottom: 4px; }
+  .grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+  @media (min-width: 560px) { .grid { grid-template-columns: 1fr 1fr; } }
+  .box { background: var(--bg); border-radius: 12px; padding: 12px 14px; }
+  .box h3 { margin: 0 0 4px; font-size: 16px; }
+  .box p { margin: 0; font-size: 15px; color: var(--ink2); }
+  .box.blue { background: var(--wash); border: 2px solid var(--blue); }
+  .box.blue h3 { color: var(--blue); }
+  .box.blue p { color: var(--ink); }
+  .tag { display: inline-block; font-size: 12px; font-weight: 700; color: var(--blue); background: var(--wash); border-radius: 6px; padding: 0 6px; margin-left: 4px; vertical-align: 2px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 4px 0 10px; }
+  th, td { text-align: left; vertical-align: top; padding: 7px 6px; border-bottom: 1px solid var(--line); }
+  th { color: var(--ink2); font-weight: 700; background: var(--bg); }
+  td:first-child { font-weight: 700; width: 38%; }
+  .todo { color: #b4540a; font-weight: 700; }
+  .jobs { list-style: none; padding: 0; margin: 8px 0 0; counter-reset: j; }
+  .jobs li { position: relative; padding: 10px 0 10px 40px; border-bottom: 1px solid var(--line); margin: 0; }
+  .jobs li:last-child { border-bottom: 0; }
+  .jobs li::before { counter-increment: j; content: counter(j); position: absolute; left: 0; top: 10px; width: 28px; height: 28px; border-radius: 50%; background: var(--blue); color: #fff; font-weight: 700; font-size: 14px; display: flex; align-items: center; justify-content: center; }
+  .jobs b { display: block; }
+  .jobs span { color: var(--ink2); font-size: 15px; }
+  .flow { display: flex; flex-direction: column; gap: 0; margin: 10px 0 4px; }
+  .flow div { display: flex; align-items: center; gap: 10px; background: var(--bg); border-radius: 10px; padding: 8px 12px; font-size: 15px; }
+  .flow div + div { margin-top: 18px; position: relative; }
+  .flow div + div::before { content: '↓'; position: absolute; top: -20px; left: 22px; color: var(--ink2); font-size: 14px; }
+  .flow .who { flex: none; font-size: 12px; font-weight: 700; border-radius: 6px; padding: 1px 7px; background: #e6e8ec; color: #3b4455; }
+  .flow .who.me { background: var(--blue); color: #fff; }
+  .flow .who.dr { background: #1f8a4c; color: #fff; }
   .note { background: var(--warn); border-color: #f3dfb4; font-size: 14px; }
   a { color: var(--blue); }
+  .foot { text-align: center; font-size: 12px; color: var(--ink2); margin-top: 18px; }
 </style>
 </head>
 <body>
 <main>
   <h1>안면마비 케어</h1>
-  <p class="sub">스마트폰으로 얼굴 움직임을 기록하고, 경과를 보고, 재활 스트레칭을 따라 하도록 돕는 앱입니다.</p>
+  <p class="sub">스마트폰 카메라로 집에서 얼굴 움직임을 재고, 경과를 기록하고, 재활 스트레칭을 영상으로 따라 하도록 돕는 앱입니다. 진단 도구가 아니라 의료진의 경과 관찰을 돕는 보조 도구를 목표로 합니다.</p>
   <div class="badges"><span>개발 중인 시제품</span><span>전문가 검수 전</span><span>임상 검증 전</span></div>
+  <nav class="toc" aria-label="바로 가기">
+    <a href="#video">영상</a><a href="#what">하는 일</a><a href="#screens">화면</a><a href="#stretch">스트레칭</a><a href="#accuracy">정확도</a><a class="hl" href="#research">함께 연구</a><a href="#plan">계획</a><a href="#try">써 보기</a>
+  </nav>
 
-  <section>
-    <h2>1분 소개 영상</h2>
+  <section id="video">
+    <h2>소개 영상 (약 1분 10초)</h2>
     <div class="video"><video src="intro.mp4" poster="poster.jpg" controls playsinline muted preload="metadata"></video></div>
     <p class="hint">소리 없는 영상입니다. 모든 화면은 예시(데모) 데이터입니다.</p>
   </section>
 
-  <section>
+  <section id="what">
+    <h2>앱이 하는 일</h2>
+    <div class="grid">
+      <div class="box"><h3>평가</h3><p>폰을 세워 두고 음성 안내에 따라 표정을 지으면, 부위별로 마비 쪽이 건강한 쪽의 몇 %만큼 움직이는지 잽니다. 빠른 평가는 표정 6가지(약 1분), 정밀 평가는 13가지(약 1분 50초)입니다.</p></div>
+      <div class="box"><h3>결과</h3><p>부위별 %와 mm, 이전 대비 변화, Sunnybrook·HB 추정치(참고용), 근육 13개 지도, 표정 10가지에서 함께 움직이는 곳을 보여 주는 연합운동 지도.</p></div>
+      <div class="box"><h3>경과와 의료진 요약</h3><p>회차별 회복 곡선과, 진료 때 보여 드릴 수 있는 한 장 요약(인쇄·PDF). 기록은 CSV·JSON으로 내보낼 수 있습니다.</p></div>
+      <div class="box"><h3>재활</h3><p>시기(급성기·회복기·동반운동 관리기)와 평가 결과에 맞춘 오늘의 운동, 선택적 스트레칭 13종 시연 영상, 운동 후 느낌(쉬움·적당·힘듦·불편)으로 다음 양 조절.</p></div>
+    </div>
+    <p class="hint">서버가 없습니다. 분석은 모두 폰 안에서 하고, 촬영 영상은 저장하거나 보내지 않습니다. 기록마다 무결성 해시(SHA-256)를 붙입니다.</p>
+  </section>
+
+  <section id="screens">
     <h2>주요 화면</h2>
-    <div class="gallery">
+    <div class="scroller">
       <figure><img src="s1.jpg" alt="홈 화면" loading="lazy"><figcaption><b>1 홈</b>최근 평가: 마비 쪽이 건강한 쪽의 몇 %만큼 움직이는지</figcaption></figure>
       <figure><img src="s2.jpg" alt="평가 안내" loading="lazy"><figcaption><b>2 평가 (약 1~2분)</b>안내대로 표정을 지으면 폰 카메라가 얼굴 점을 따라가며 측정</figcaption></figure>
       <figure><img src="s3.jpg" alt="평가 결과" loading="lazy"><figcaption><b>3 평가 결과</b>부위별 움직임 %와 추정 등급(Sunnybrook·HB, 참고용)</figcaption></figure>
@@ -53,21 +108,109 @@
       <figure><img src="s5.jpg" alt="경과 그래프" loading="lazy"><figcaption><b>5 경과</b>평가가 쌓이면 전체·부위별 회복 곡선</figcaption></figure>
       <figure><img src="s6.jpg" alt="의료진용 요약" loading="lazy"><figcaption><b>6 의료진용 한 장 요약</b>진료 때 보여 주거나 인쇄·PDF로 전달</figcaption></figure>
       <figure><img src="s7.jpg" alt="재활 계획" loading="lazy"><figcaption><b>7 재활 계획</b>평가 결과와 회복 단계에 맞춘 오늘의 운동</figcaption></figure>
-      <figure><img src="s8.jpg" alt="스트레칭 시연 영상" loading="lazy"><figcaption><b>8 스트레칭 시연</b>고정하는 손(자물쇠)과 늘이는 손(화살표)을 영상 위에 표시, 2D·3D로도 보기</figcaption></figure>
+      <figure><img src="s8.jpg" alt="스트레칭 시연 영상" loading="lazy"><figcaption><b>8 스트레칭 시연</b>고정하는 손(파란 자물쇠)과 늘이는 방향(주황 화살표)을 영상 위에 표시</figcaption></figure>
     </div>
     <p class="hint">옆으로 넘겨 보세요. <a href="overview.jpg">한 장으로 모두 보기</a></p>
   </section>
 
-  <section class="plan">
-    <h2>지금까지와 앞으로의 계획</h2>
-    <a href="plan.pdf"><img src="plan.jpg" alt="진행 계획 한 장" loading="lazy"></a>
-    <a class="btn ghost" href="plan.pdf">계획서 PDF 열기</a>
+  <section id="stretch">
+    <h2>스트레칭 시연 영상 <span class="tag">13종 · 16단계</span></h2>
+    <p>한림대학교 동탄성심병원 도수치료실의 「안면마비 선택적 스트레칭」 영상을 프레임 단위로 보며, 손 위치·방향·움직임을 3D 캐릭터로 다시 만들었습니다. 앱에서는 운동 시간에 맞춰 손 대기 → 늘리기 → 유지 → 풀기 순서로 재생하고, 마비 쪽에 맞춰 좌우를 바꿔 보여 줍니다.</p>
+    <div class="scroller clips">
+      <figure><video data-src="../demo/cheek-guide.zyg-minor.mp4" poster="../demo/cheek-guide.zyg-minor.hold.jpg" muted loop playsinline preload="none" aria-label="작은광대근 스트레칭 시연"></video><figcaption><b>작은광대근</b>고개를 건강한 쪽으로 45° 돌린 채, 광대뼈 아래를 걸어 고정하고 윗입술 옆을 대각선 아래로</figcaption></figure>
+      <figure><video data-src="../demo/jaw-lengthen.risorius.mp4" poster="../demo/jaw-lengthen.risorius.hold.jpg" muted loop playsinline preload="none" aria-label="입꼬리당김근 스트레칭 시연"></video><figcaption><b>입꼬리당김근</b>볼 가장자리를 손바닥으로 고정하고 입꼬리를 수평으로</figcaption></figure>
+      <figure><video data-src="../demo/corner-lift.lao.mp4" poster="../demo/corner-lift.lao.hold.jpg" muted loop playsinline preload="none" aria-label="입꼬리올림근 스트레칭 시연"></video><figcaption><b>입꼬리올림근</b>입꼬리 위 광대뼈를 고정하고 수직 아래로</figcaption></figure>
+      <figure><video data-src="../demo/oris-release.oris.mp4" poster="../demo/oris-release.oris.hold.jpg" muted loop playsinline preload="none" aria-label="입둘레근 스트레칭 시연"></video><figcaption><b>입둘레근</b>볼을 손바닥으로 고정하고 손가락으로 입술을 반대쪽으로</figcaption></figure>
+      <figure><video data-src="../demo/platysma-lift.platysma.mp4" poster="../demo/platysma-lift.platysma.hold.jpg" muted loop playsinline preload="none" aria-label="넓은목근 스트레칭 시연"></video><figcaption><b>넓은목근</b>쇄골을 아래로 눌러 고정하고 고개를 반대로 돌려 뒤로 젖히기</figcaption></figure>
+    </div>
+    <p class="hint">옆으로 넘겨 보세요. 앱에서는 13종 모두 볼 수 있습니다. 동작은 전문가 검수와 원본 사용 허락 전입니다.</p>
   </section>
 
-  <section>
+  <section id="accuracy">
+    <h2>측정 방식과 현재 정확도</h2>
+    <p><b>실제 환자에서 전문의 평가와 비교한 검증은 아직 없습니다.</b> 지금까지는 정답을 아는 합성 얼굴과 공개 얼굴 자료로 시험했습니다.</p>
+    <h3>어떻게 재나요</h3>
+    <ol class="small">
+      <li>구글 MediaPipe 얼굴 모델로 얼굴 점 478개를 폰 안에서 찾습니다(모델 파일은 해시로 고정).</li>
+      <li>안정 시 점을 찾은 뒤, 표정을 짓는 동안 광류로 점을 따라갑니다.</li>
+      <li>부위별 이동 거리를 동공 간 거리로 맞추고(홍채 지름 11.7 mm 기준 mm 환산), 마비 쪽 ÷ 건강한 쪽 비율을 냅니다.</li>
+      <li>Sunnybrook·HB는 이 비율에서 규칙으로 추정한 참고값입니다.</li>
+    </ol>
+    <h3>시험 결과</h3>
+    <table>
+      <tr><th>시험</th><th>결과</th></tr>
+      <tr><td>합성 얼굴 (한쪽 움직임을 알려진 비율로 줄임)</td><td>실제 50% → 측정 48–57% (동작 4가지)</td></tr>
+      <tr><td>실제 얼굴 사진 97명 (한쪽을 완전 마비로 합성, 정답 0%)</td><td>가운데값 4% (추적 없이 검출만 쓰면 15%)</td></tr>
+      <tr><td>실제 얼굴 27명 (이마·눈, 같은 방식의 합성)</td><td>움직이지 않게 만든 쪽을 약 0%로 읽음 (건강한 쪽 움직임이 새어 들어가지 않음)</td></tr>
+      <tr><td>같은 사람 반복 측정 신뢰도</td><td class="todo">아직</td></tr>
+      <tr><td>전문의 평가와 일치도</td><td class="todo">아직 · 파일럿 연구로 확인할 부분</td></tr>
+    </table>
+    <h3>지금까지 고친 것</h3>
+    <ul class="small">
+      <li>얼굴 점을 매 프레임 새로 찾기만 하면 AI 모델이 비대칭을 줄여 잡아 마비가 가볍게 보입니다. 점을 따라가는 추적으로 바꿔 합성 시험 오차가 약 5–10배 줄었습니다.</li>
+      <li>고개가 5° 넘게 돌아간 프레임은 쓰지 않고, 표정 때 함께 움직이는 기준점(콧등, 볼 윤곽)은 자동으로 뺍니다.</li>
+      <li>한쪽 눈만 감을 때 감은 눈을 덜 읽던 문제는 거울 합성으로 고쳤습니다.</li>
+    </ul>
+    <h3>다음에 할 것</h3>
+    <ul class="small">
+      <li>같은 사람을 여러 번 재서 반복 측정 신뢰도를 봅니다.</li>
+      <li>최신 점 추적 AI 모델을 같은 합성 시험으로 비교해, 더 정확하면 바꿉니다.</li>
+      <li>전문의 평가(Sunnybrook·HB)와 비교하는 파일럿 연구로 실제 정확도를 확인합니다.</li>
+    </ul>
+  </section>
+
+  <section id="research" class="hl">
+    <h2>함께 연구하실 선생님께</h2>
+    <p>앱이 실제 진료에서 믿을 만한지 확인하는 작은 파일럿 연구를 함께하고 싶습니다. 선생님께 부담은 적고 실적이 되도록 준비했습니다.</p>
+    <div class="grid">
+      <div class="box"><h3>연구 책임</h3><p>파일럿 연구(외래 환자 약 38명, 전문의 2인의 Sunnybrook·HB와 앱 측정값 비교)를 선생님이 연구책임자로 이끄시고, 논문·학회 발표는 선생님 실적으로 합니다.</p></div>
+      <div class="box"><h3>과제 연구비</h3><p>선생님이 연구책임자로 신청하실 수 있는 과제(대한재활의학회 연구비, 한국연구재단 기초연구 등)를 계획서 준비부터 함께 돕겠습니다.</p></div>
+    </div>
+    <div class="box blue" style="margin-top:10px">
+      <h3>연구 데이터 처리는 제가 맡겠습니다</h3>
+      <p>연구원으로 참여해, 연구에서 손이 가장 많이 가는 데이터 처리를 처음부터 끝까지 맡겠습니다. 선생님은 진료와 임상 평가에 집중하시면 됩니다.</p>
+    </div>
+    <ol class="jobs">
+      <li><b>측정 자동화</b><span>앱이 방문마다 같은 절차로 재고, 부위별 %·mm·연합운동 값을 자동으로 계산합니다. 영상을 다시 보며 손으로 잴 필요가 없습니다.</span></li>
+      <li><b>자료 정리</b><span>이름 없이 연구 ID로 방문별·환자별 표(엑셀·CSV)를 만들고, 빠진 값과 튀는 값을 점검합니다. 원자료에는 무결성 해시가 붙어 나중에 바뀌지 않았음을 확인할 수 있습니다.</span></li>
+      <li><b>통계 분석</b><span>전문의 평가와의 일치도(ICC, 가중 κ, Bland–Altman), 반복 측정 신뢰도(ICC, 최소 탐지 변화량), 경과에 따른 변화. 분석 코드와 결과표를 함께 드려 다시 계산해 보실 수 있습니다.</span></li>
+      <li><b>논문·발표 자료</b><span>측정 방법(알고리즘) 서술, 결과 표·그림, 부록, 학회 발표 자료 초안을 만듭니다.</span></li>
+      <li><b>서류 초안</b><span>연구계획서, IRB 서류, 데이터 관리 계획, 과제 신청서 초안을 먼저 써 드립니다.</span></li>
+      <li><b>기존 자료 연구도</b><span>차트의 HB·Sunnybrook 기록 같은 기존 자료로 후향 연구를 하실 때도 정리와 분석을 돕겠습니다.</span></li>
+    </ol>
+    <h3>연구 데이터는 이렇게 흐릅니다</h3>
+    <div class="flow">
+      <div><span class="who">환자</span>외래에서 앱 평가 (방문마다 약 2분 × 2회)</div>
+      <div><span class="who dr">선생님</span>같은 방문에서 Sunnybrook·HB 평가 (앱 결과는 보지 않음)</div>
+      <div><span class="who me">제가</span>연구 ID로 모아 정리·검증 → 통계 분석·표·그림</div>
+      <div><span class="who dr">선생님</span>결과 검토와 임상 해석</div>
+      <div><span class="who dr">선생님</span>논문·학회 발표 (연구책임자)</div>
+    </div>
+    <p class="hint">환자 자료는 IRB 승인 범위 안에서만, 이름·연락처 없이 연구 ID로 다룹니다.</p>
+  </section>
+
+  <section id="plan" class="plan">
+    <h2>지금까지와 앞으로의 계획</h2>
+    <table>
+      <tr><th>시기(안)</th><th>할 일</th></tr>
+      <tr><td>지금 ~ 3개월</td><td>선생님 의견 반영, 전문의·치료사 동작 검수와 원본 영상 사용 허락, 환자 몇 분께 써 보기, 연구계획서·IRB 준비</td></tr>
+      <tr><td>3 ~ 12개월</td><td>파일럿 연구(약 38명)와 결과 발표, 식약처 의료기기 해당 여부·등급 검토</td></tr>
+      <tr><td>그 뒤</td><td>결과에 따라 다기관 연구, 인허가와 정부 지원사업 준비</td></tr>
+    </table>
+    <a href="plan.pdf"><img src="plan.jpg" alt="진행 계획 한 장" loading="lazy"></a>
+    <a class="btn ghost" href="plan.pdf">계획서 한 장 (PDF)</a>
+  </section>
+
+  <section id="try">
     <h2>직접 써 보기</h2>
-    <p style="margin:0">첫 화면에서 <b>‘데모 데이터로 둘러보기’</b>를 누르면 예시 기록 10회가 채워집니다. 개인 정보는 들어 있지 않고, 분석은 폰 안에서만 합니다.</p>
+    <ol class="small">
+      <li>아래 버튼으로 앱을 열고, 첫 화면에서 <b>‘데모 데이터로 둘러보기’</b>를 누르면 예시 기록 10회가 채워집니다. 개인 정보는 들어 있지 않습니다.</li>
+      <li><b>결과</b>: 홈의 최근 평가 → 부위별 %, 근육별 상세, 연합운동 지도.</li>
+      <li><b>재활</b>: ‘재활’ 탭 → ‘전체 운동 목록’에서 스트레칭을 누르면 시연 영상이 나옵니다.</li>
+      <li><b>직접 측정</b>: ‘평가’ 탭 → 빠른 평가(약 1분). 폰을 눈높이에 세우고 음성 안내를 따릅니다. 분석은 폰 안에서만 합니다.</li>
+    </ol>
     <a class="btn" href="../">앱 데모 열기</a>
+    <p class="hint">안드로이드 Chrome에서 확인했고, 아이폰은 아직 확인하지 못했습니다.</p>
   </section>
 
   <section class="note">
@@ -77,6 +220,23 @@
       <li>스트레칭은 한림대학교 동탄성심병원 도수치료실 「안면마비 선택적 스트레칭」 영상을 보고 재구성했으며, 전문가 검수와 원본 사용 허락 전입니다.</li>
     </ul>
   </section>
+  <p class="foot">2026년 9월 30일 기준</p>
 </main>
+<script>
+  // Stretch clips: load and play only while on screen (saves mobile data), pause when scrolled away.
+  (function () {
+    var vids = [].slice.call(document.querySelectorAll('video[data-src]'));
+    function start(v) {
+      if (!v.src) { v.src = v.getAttribute('data-src'); }
+      var p = v.play();
+      if (p && p.catch) p.catch(function () {});
+    }
+    if (!('IntersectionObserver' in window)) { vids.forEach(function (v) { v.src = v.getAttribute('data-src'); v.controls = true; }); return; }
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) start(e.target); else if (!e.target.paused) e.target.pause(); });
+    }, { threshold: 0.6 });
+    vids.forEach(function (v) { io.observe(v); });
+  })();
+</script>
 </body>
 </html>
