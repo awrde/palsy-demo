@@ -8,8 +8,9 @@
 // v8: eye-open again (the fixing middle finger below the eye, the index above it).
 // v9: eye-open inner-out: the stretching middle finger starts below the eye too.
 // v10: eye-open inner-out: the stretching fingers close onto the eye line while sliding out (2:37-2:43).
+// v11: 14 stretch clips re-matched to the source motion frame by frame.
 // Bump when a public/ file keeps its name but changes: cached files are served cache-first.
-const CACHE = 'fpc-v10';
+const CACHE = 'fpc-v11';
 const MODEL_HOST = 'storage.googleapis.com';
 
 self.addEventListener('install', (e) => {
