@@ -13,6 +13,9 @@
 // Bump when a public/ file keeps its name but changes: cached files are served cache-first.
 const CACHE = 'fpc-v12';
 const MODEL_HOST = 'storage.googleapis.com';
+// Reminder state written by the app (ui/notify.ts); kept across versions.
+const REMINDERS = 'fpc-reminders';
+const REMINDER_KEY = './__fpc-reminders';
 
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(['./', './index.html', './manifest.webmanifest', './icons/icon.svg', './icons/icon-192.png', './icons/apple-touch-icon.png'])));
@@ -21,7 +24,10 @@ self.addEventListener('install', (e) => {
 
 self.addEventListener('activate', (e) => {
   e.waitUntil(
-    caches.keys().then((keys) => Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k)))).then(() => self.clients.claim()),
+    caches
+      .keys()
+      .then((keys) => Promise.all(keys.filter((k) => k !== CACHE && k !== REMINDERS).map((k) => caches.delete(k))))
+      .then(() => self.clients.claim()),
   );
 });
 
@@ -57,5 +63,45 @@ self.addEventListener('fetch', (e) => {
           return res;
         }),
     ),
+  );
+});
+
+// Best-effort exercise reminder (SRS-RHB-017): periodic background sync (installed Android app) wakes this worker now
+// and then; notify once per reminder time when it has passed and nothing was logged today.
+const pad = (n) => String(n).padStart(2, '0');
+async function remindIfDue() {
+  const c = await caches.open(REMINDERS);
+  const res = await c.match(REMINDER_KEY);
+  if (!res) return;
+  const s = await res.json();
+  const now = new Date();
+  const today = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
+  const hhmm = `${pad(now.getHours())}:${pad(now.getMinutes())}`;
+  const passed = (s.times || []).filter((t) => t <= hhmm);
+  if (!passed.length || s.lastDone === today) return;
+  const key = `${today} ${passed[passed.length - 1]}`;
+  if (s.lastNotified === key) return;
+  await self.registration.showNotification('얼굴 운동 시간', {
+    body: '오늘의 얼굴 운동을 아직 하지 않았어요. 눌러서 시작하세요.',
+    tag: 'fpc-remind',
+    icon: './icons/icon-192.png',
+    data: { url: './#/rehab' },
+  });
+  await c.put(REMINDER_KEY, new Response(JSON.stringify({ ...s, lastNotified: key }), { headers: { 'content-type': 'application/json' } }));
+}
+
+self.addEventListener('periodicsync', (e) => {
+  if (e.tag === 'fpc-remind') e.waitUntil(remindIfDue());
+});
+
+self.addEventListener('notificationclick', (e) => {
+  e.notification.close();
+  const url = (e.notification.data && e.notification.data.url) || './';
+  e.waitUntil(
+    self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then((ws) => {
+      const w = ws[0];
+      if (w) return w.focus().then(() => (w.navigate ? w.navigate(url) : undefined));
+      return self.clients.openWindow(url);
+    }),
   );
 });
