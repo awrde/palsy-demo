@@ -1,0 +1,1 @@
+var e={research:{estimatedScales:!0,rehab:`personalized`,researchTools:!0,demo:!0},"samd-assessment":{estimatedScales:!0,rehab:`off`,researchTools:!1,demo:!1},wellness:{estimatedScales:!1,rehab:`generic`,researchTools:!1,demo:!0}},t=`research`,n=t in e?t:`research`,r=Object.freeze(e[n]);export{n,r as t};
