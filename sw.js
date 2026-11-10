@@ -10,7 +10,8 @@
 // v10: eye-open inner-out: the stretching fingers close onto the eye line while sliding out (2:37-2:43).
 // v11: 14 stretch clips re-matched to the source motion frame by frame.
 // v12: four hand poses (zyg-major palm, llsan fist x2, depressors claw, platysma stacked palms) re-rendered.
-// Bump when a public/ file keeps its name but changes: cached files are served cache-first.
+// Bump when a public/ file keeps its name but changes: cached files are served cache-first (index.html and
+// manifest.webmanifest excepted: both network-first).
 const CACHE = 'fpc-v12';
 const MODEL_HOST = 'storage.googleapis.com';
 // Reminder state written by the app (ui/notify.ts); kept across versions.
@@ -48,6 +49,23 @@ self.addEventListener('fetch', (e) => {
           return res;
         })
         .catch(() => caches.match('./index.html')),
+    );
+    return;
+  }
+  // The app manifest is network-first too: served cache-first it kept the old blue theme_color (#2a78d6) on phones
+  // after the 2026-11-08 Toss colours (white bars) went live, because this cache name was not bumped for that change,
+  // so the installed app's system bars stayed blue (2026-11-10 user: the bottom bar is still blue). Offline: cached copy.
+  if (sameOrigin && url.pathname.endsWith('/manifest.webmanifest')) {
+    e.respondWith(
+      fetch(req)
+        .then((res) => {
+          if (res.ok) {
+            const copy = res.clone();
+            caches.open(CACHE).then((c) => c.put('./manifest.webmanifest', copy));
+          }
+          return res;
+        })
+        .catch(() => caches.match('./manifest.webmanifest')),
     );
     return;
   }

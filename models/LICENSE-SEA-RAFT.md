@@ -1,7 +1,9 @@
-SEA-RAFT optical-flow model: models/searaft_M_512.onnx (research setting only)
+SEA-RAFT optical-flow models: models/searaft_S_512x256.onnx and its 16-bit copy models/searaft_S_512x256_fp16.onnx
+(research build only; until 2026-11-09 models/searaft_M_512.onnx)
 
-Converted to ONNX by tools/bench/export_searaft.py from the authors' checkpoint
-MemorySlices/Tartan-C-T-TSKH-spring540x960-M (https://huggingface.co/MemorySlices/Tartan-C-T-TSKH-spring540x960-M).
+Converted to ONNX by tools/bench/export_searaft.py from the authors' checkpoints
+MemorySlices/Tartan-C-T-TSKH-spring540x960-S (https://huggingface.co/MemorySlices/Tartan-C-T-TSKH-spring540x960-S;
+before 2026-11-09 MemorySlices/Tartan-C-T-TSKH-spring540x960-M); the 16-bit copy by tools/bench/onnx_fp16.py.
 Code: https://github.com/princeton-vl/SEA-RAFT. Licence of the code and the checkpoint:
 
 ```
