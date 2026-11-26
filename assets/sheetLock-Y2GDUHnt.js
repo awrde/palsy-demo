@@ -1,0 +1,1 @@
+import{o as e}from"./jsxRuntime.module-C1PAe6_G.js";var t=0;function n(n=!0){e(()=>{if(n&&typeof document<`u`)return t+=1,document.documentElement.classList.add(`sheet-open`),()=>{t=Math.max(0,t-1),t===0&&document.documentElement.classList.remove(`sheet-open`)}},[n])}export{n as t};
